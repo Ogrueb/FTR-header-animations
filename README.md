@@ -2,15 +2,16 @@
 
 The six animations played in the header of the Windows Vista / 7 / 10 file-operation progress dialog, decoded from their original vector data (shell32 resource type `FTR`, IDs 200–205) and rendered by an independent renderer. Validated against 1:1 screen recordings on Vista, Windows 7 and Windows 10 with no fitting: median error 1.0–1.6 levels out of 255 on lossless Windows 7 captures, 1.8–3.8 on compressed captures.
 
-## The release
+## Downloads
+
+The renders are attached to the [latest release](https://github.com/Ogrueb/FTR-header-animations/releases/latest) as two zips with the same layout and file names; pick one, or both.
 
 | File | Contents |
 |---|---|
-| `FTR_header_animations_2026-10-08.zip` | **main package:** this README, `docs/format_and_player.md` (file format, how the player draws, timing, dialog layout, validation), `toolkit/` (resource extractor, parser, renderer with both models, export scripts, dialog trigger scripts) and `validation/` (recordings vs renders) |
 | `FTR_header_animations_exports_gdiplus_2026-10-08.zip` | the renders **as Windows drew them** (`gdiplus` model) |
 | `FTR_header_animations_exports_geometric_2026-10-08.zip` | the renders **as the shapes describe them** (`geometric` model) |
 
-The two export zips have the same layout and file names; pick one, or both. The toolkit in the main package reproduces either set (apart from rare one-level rounding differences between machines).
+This repository holds the rest: `docs/format_and_player.md` (file format, how the player draws, timing, dialog layout, validation), `toolkit/` (resource extractor, parser, renderer with both models, export scripts, dialog trigger scripts) and `validation/` (recordings vs renders). The toolkit reproduces either export set (apart from rare one-level rounding differences between machines).
 
 ## Choosing an export set
 
@@ -59,7 +60,7 @@ The files declare 24 fps, and the main exports use exactly that (41.67 ms per fr
 
 ## Header strips
 
-Recreations of the whole 400×40 header: gradient, animation and the text "<Operation> 45 items (450 MB)".
+Recreations of the whole 400×40 header: gradient, animation and the text `<Operation> 45 items (450 MB)`.
 - **win7 style** (Windows 7 and 10): black text drawn over the animation.
 - **vista style:** teal/green gradient, white text drawn under the animation.
 
@@ -88,10 +89,10 @@ python toolkit/export.py ftr_data/ftr_201_copy.bin out --name copy --sizes 400x4
 python toolkit/strip.py ftr_data/ftr_201_copy.bin out --font segoeui.ttf --text "Copying 3 items (12 MB)" --model geometric
 ```
 
-`extract_ftr.py` writes `ftr_200_generic.bin`, `ftr_201_copy.bin`, `ftr_202_move.bin`, `ftr_203_apply_properties.bin`, `ftr_204_recycle.bin` and `ftr_205_delete.bin`. The published sets use `--name` generic, copy, move, properties, recycle and delete, and the strip text "<Operation> 45 items (450 MB)" (200 uses "Downloading").
+`extract_ftr.py` writes `ftr_200_generic.bin`, `ftr_201_copy.bin`, `ftr_202_move.bin`, `ftr_203_apply_properties.bin`, `ftr_204_recycle.bin` and `ftr_205_delete.bin`. The published sets use `--name` generic, copy, move, properties, recycle and delete, and the strip text `<Operation> 45 items (450 MB)` (200 uses "Downloading").
 
 ## Licence
 
-The toolkit (`toolkit/`) and the documentation in this package are licensed under the GNU Affero General Public License, version 3 or (at your option) any later version: see `LICENSE` (SPDX: `AGPL-3.0-or-later`). Each source file carries an SPDX header.
+The toolkit (`toolkit/`) and the documentation in this repository are licensed under the GNU Affero General Public License, version 3 or (at your option) any later version: see `LICENSE` (SPDX: `AGPL-3.0-or-later`). Each source file carries an SPDX header.
 
 The licence does not cover Microsoft's material: the FTR animation data (not included; you extract it from your own Windows files), the renders made from it, the Segoe UI font, or the Windows screen captures in `validation/`.
